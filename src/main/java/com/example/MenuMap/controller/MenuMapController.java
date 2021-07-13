@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class MenuMapController {
@@ -17,11 +18,19 @@ public class MenuMapController {
 
 
     //Show CodercellarMenu
-    @GetMapping("/showCodersCellarMenu")
+    @GetMapping("/CoderCellarsMenu")
     @ResponseStatus(HttpStatus.OK)
-    public List<MenuMap> findAll(){
+    public List<MenuMap> getCoderCellarsMenu(){
         return menuMapRepository.findAll();
     }
+
+    //Menu Content
+    @GetMapping("/menuMapContent/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Optional<MenuMap> getMenuMapContent (@PathVariable Integer id){
+        return menuMapRepository.findById(id);
+    }
+
 
     @PostMapping(value= "/addNewMenuContent", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(HttpStatus.CREATED)
